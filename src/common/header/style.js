@@ -7,6 +7,7 @@ export const HeaderWrapper = styled.div`
     margin: 0 auto;
     transition: transform .3s cubic-bezier(.645,.045,.355,1)
     position:relative;
+    box-shadow: 0 2px 10px rgba(0,0,0,.05)
 `
 
 export const Logo = styled.a.attrs({
@@ -53,8 +54,12 @@ export const NavItem = styled.div`
             line-height:30px;
             border-radius:15px;
             text-align:center;
-            background-color:#ccc;
+            &.focused{
+                background-color:#777;
+                color:#fff;
+            }
         }
+        
     }
 `
 
@@ -64,7 +69,7 @@ export const NavSearch = styled.input.attrs({
     width:160px;
     height:38px;
     margin-top:9px;
-    padding:0 20px;
+    padding:0 35px 0 20px;
     box-sizing:border-box;
     line-height:56px;
     border:none;
@@ -72,9 +77,26 @@ export const NavSearch = styled.input.attrs({
     border-radius:19px;
     background-color:#eee;
     font-size:14px;
+    color:#666;
 
     &::placeholder{
         color:#999;
+    }
+
+    &.focused{
+        width:240px;
+    }
+    &.slide-enter{
+        transition:all .2s ease-out;
+    }
+    &.slide-enter-active{
+        width:240px;
+    }
+    &.slide-exit{
+        transition:all .2s ease-out;
+    }
+    &.slide-exit-active{
+        width:160px;
     }
 `
 //右侧附加内容

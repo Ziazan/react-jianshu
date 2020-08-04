@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {CSSTransition} from 'react-transition-group'
 import {
     HeaderWrapper,
     Logo,
@@ -11,6 +12,14 @@ import {
 
 
 class Header extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            focused:false
+        }
+        this.handleFocus = this.handleFocus.bind(this)
+        this.handleBlur = this.handleBlur.bind(this)
+    }
     render() {
         return (
             <HeaderWrapper>
@@ -19,9 +28,22 @@ class Header extends Component {
                     <NavItem className="left active">发现</NavItem>
                     <NavItem className="left">关注</NavItem>
                     <NavItem className="left">消息</NavItem>
+                    
                     <NavItem className="left search">
-                        <NavSearch className="left" />
-                        <i className="iconfont">&#xe614;</i>
+                    <CSSTransition
+                            timeout={200}
+                            in={this.state.focused}
+                            classNames="slide"
+                            >
+                            <NavSearch
+                                onFocus={this.handleFocus}
+                                onBlur={this.handleBlur}
+                                className={this.state.focused?'left focused':'left'}
+                            />
+                             </CSSTransition>
+                             <i className={this.state.focused?'iconfont focused':'iconfont'}>
+                                &#xe614;
+                            </i>
                     </NavItem>
                     <NavItem className="right">
                         <i className="iconfont">&#xe636;</i>
@@ -38,6 +60,17 @@ class Header extends Component {
                 </Addition>
             </HeaderWrapper>
         )
+    }
+    handleFocus(){
+        this.setState({
+            focused:true
+        })
+    }
+
+    handleBlur(){
+        this.setState({
+            focused:false
+        })
     }
 }
 
