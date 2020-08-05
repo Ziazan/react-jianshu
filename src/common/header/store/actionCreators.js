@@ -1,8 +1,8 @@
-import { UPDATE_FOCUS } from './actionTypes'
+import * as constants from './constants'
 
 export const setFocuse = (isFocused)=>{
     return{
-        type:UPDATE_FOCUS,
+        type:constants.UPDATE_FOCUS,
         isFocused
     }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
-import { setFocuse } from './store/actionCreator'
+import { actionCreators } from './store'
 
 import {
     HeaderWrapper,
@@ -66,11 +66,11 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps =  (dispatch)=>{
     return {
         handleFocus:()=>{
-            const action = setFocuse(true)
+            const action = actionCreators.setFocuse(true)
             dispatch(action)
         },
         handleBlur:()=>{
-            const action = setFocuse(false)
+            const action = actionCreators.setFocuse(false)
             dispatch(action)
         }
     }
