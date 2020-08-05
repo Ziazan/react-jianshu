@@ -9,12 +9,37 @@ import {
     Nav,
     NavItem,
     NavSearch,
+    SearchInfo,
+    SearchHeader,
+    SearchSwitch,
+    SearchList,
+    SearchItem,
     Addition,
     Button
 } from './style'
 
 
 class Header extends Component {
+    getListArea(show){
+        if(show){
+            return (
+                <SearchInfo>
+                    <SearchHeader>
+                        热门搜索
+                        <SearchSwitch>换一批</SearchSwitch>
+                    </SearchHeader>
+                    <SearchList>
+                        <SearchItem>简书</SearchItem>
+                        <SearchItem>简书</SearchItem>
+                        <SearchItem>简书</SearchItem>
+                        <SearchItem>简书</SearchItem>
+                    </SearchList>
+                </SearchInfo>
+            )
+        }else{
+            return null
+        }
+    }
     render() {
         return (
             <HeaderWrapper>
@@ -25,7 +50,7 @@ class Header extends Component {
                     <NavItem className="left">消息</NavItem>
                     
                     <NavItem className="left search">
-                    <CSSTransition
+                        <CSSTransition
                             timeout={200}
                             in={this.props.focused}
                             classNames="slide"
@@ -35,10 +60,11 @@ class Header extends Component {
                                 onBlur={this.props.handleBlur}
                                 className={this.props.focused?'left focused':'left'}
                             />
-                             </CSSTransition>
+                        </CSSTransition>
                              <i className={this.props.focused?'iconfont focused':'iconfont'}>
                                 &#xe614;
                             </i>
+                        {this.getListArea(this.props.focused)}
                     </NavItem>
                     <NavItem className="right">
                         <i className="iconfont">&#xe636;</i>

@@ -1,8 +1,6 @@
 ## redux-immutable
 `redux-immutable` 把state的取值统一
 
-
-
 ```javascript
 const mapStateToProps = (state)=>{
     return {

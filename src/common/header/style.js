@@ -99,6 +99,46 @@ export const NavSearch = styled.input.attrs({
         width:160px;
     }
 `
+export const SearchInfo = styled.div`
+    position:absolute;
+    top:66px;
+    width:240px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+    padding:10px;
+`
+export const SearchHeader = styled.div`
+   margin-bottom:10px;
+   font-size:14px;
+   line-height:24px;
+   color:#999
+`
+export const SearchSwitch = styled.a`
+    font-size:13px;
+    float:right;
+    &:hover{
+        color:#333
+    }
+`
+export const SearchList = styled.div`
+    overflow:hidden;
+`
+export const SearchItem = styled.a`
+    display:block;
+    float:left;
+    margin-right:10px;
+    margin-bottom:10px;
+    font-size:13px;
+    line-height:20px;
+    padding:0 10px;
+    border:1px solid #ddd;
+    border-radius:5px;
+    &:hover{
+        border-color:#ec6149;
+        color:#ec6149;
+    }
+    
+`
+
 //右侧附加内容
 export const Addition = styled.div`
     position:absolute;
