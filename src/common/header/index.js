@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-import {CSSTransition} from 'react-transition-group'
+import { connect } from 'react-redux'
+import { CSSTransition } from 'react-transition-group'
+import { setFocuse } from './store/actionCreator'
+
 import {
     HeaderWrapper,
     Logo,
@@ -12,14 +15,6 @@ import {
 
 
 class Header extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            focused:false
-        }
-        this.handleFocus = this.handleFocus.bind(this)
-        this.handleBlur = this.handleBlur.bind(this)
-    }
     render() {
         return (
             <HeaderWrapper>
@@ -32,16 +27,16 @@ class Header extends Component {
                     <NavItem className="left search">
                     <CSSTransition
                             timeout={200}
-                            in={this.state.focused}
+                            in={this.props.focused}
                             classNames="slide"
                             >
                             <NavSearch
-                                onFocus={this.handleFocus}
-                                onBlur={this.handleBlur}
-                                className={this.state.focused?'left focused':'left'}
+                                onFocus={this.props.handleFocus}
+                                onBlur={this.props.handleBlur}
+                                className={this.props.focused?'left focused':'left'}
                             />
                              </CSSTransition>
-                             <i className={this.state.focused?'iconfont focused':'iconfont'}>
+                             <i className={this.props.focused?'iconfont focused':'iconfont'}>
                                 &#xe614;
                             </i>
                     </NavItem>
@@ -61,17 +56,23 @@ class Header extends Component {
             </HeaderWrapper>
         )
     }
-    handleFocus(){
-        this.setState({
-            focused:true
-        })
-    }
-
-    handleBlur(){
-        this.setState({
-            focused:false
-        })
+}
+const mapStateToProps = (state)=>{
+    return {
+        focused:state.header.focused,
     }
 }
 
-export default Header
+const mapDispatchToProps =  (dispatch)=>{
+    return {
+        handleFocus:()=>{
+            const action = setFocuse(true)
+            dispatch(action)
+        },
+        handleBlur:()=>{
+            const action = setFocuse(false)
+            dispatch(action)
+        }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Header)
