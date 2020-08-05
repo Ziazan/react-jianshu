@@ -1,3 +1,39 @@
+## redux-immutable
+`redux-immutable` 把state的取值统一
+
+
+
+```javascript
+const mapStateToProps = (state)=>{
+    return {
+        focused:state.header.get('focused'),
+    }
+}
+```
+`state.header`和 `state.header.get()`数据获取的方式不统一
+```
+npm install -D redux-immutable
+```
+在`store/reducers.js`
+```javascript
+// import { combineReducers } from 'redux'
+// 修改为
+import { combineReducers } from 'redux-immutable'
+```
+
+在 `header/index.js`
+```javascript
+const mapStateToProps = (state)=>{
+    return {
+        // focused:state.header.get('focused'),
+        //修改为：
+        // focused:state.get('header').get('focused'),
+        //等价于：
+        focused:state.getIn(['header','focused']),
+    }
+}
+```
+---
 ## immutable
 
 ```
@@ -33,4 +69,3 @@ const mapStateToProps = (state)=>{
 }
 ```
 
-## redux-immutable
