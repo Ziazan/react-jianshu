@@ -16,7 +16,7 @@ export const HomeLeft = styled.div`
     }
 `
 export const HomeRight = styled.div`
-    width:280;
+    width:280px;
     float:left;
 `
 
@@ -76,4 +76,87 @@ export const ListInfo = styled.div`
     float:left;
 `
 export const Link = styled.a`
+`
+
+// 右边/推荐
+export const RecommendWrapper = styled.div`
+    margin:30px 0;
+    width:280px;
+`
+export const RecommendItem = styled.div`
+    width:100%;
+    min-height: 50px;
+    background:url(${(props)=>props.imgUrl});
+    background-size:contain;
+    margin-bottom: 6px;
+    border-radius: 4px;
+`
+
+export const WriterWrapper = styled.div`
+    margin-bottom: 20px;
+    padding-top: 0;
+    font-size: 13px;
+`
+export const WriterHeader = styled.div`
+   
+  margin-bottom:10px;
+   font-size:14px;
+   line-height:24px;
+   color:#999
+`
+export const WriterSwitch = styled.a`
+    font-size:13px;
+    float:right;
+    &:hover{
+        color:#333
+    }
+    .spin{
+        display:block;
+        float:left;
+        font-size:12px;
+        margin-right:2px;
+        transition:all .3s ease-in;
+        transform:rotate(80deg)
+        transform-origin:center center;
+    }
+`
+export const WriterList = styled.div`
+  margin-bottom:10px;
+   font-size:14px;
+   line-height:24px;
+   color:#999;
+`
+
+export const WriterItem = styled.div`
+  margin-bottom:10px;
+   font-size:14px;
+   line-height:24px;
+   color:#999;
+
+   .avatar{
+    float: left;
+    width: 48px;
+    height: 48px;
+    border-radius:24px;
+    margin-right: 10px;
+   }
+    .follow{
+        float: right;
+        margin-top: 5px;
+        padding: 0;
+        font-size: 13px;
+        color: #42c02e;
+   }
+   .name{
+    padding-top: 5px;
+    margin-right: 60px;
+    font-size: 14px;
+    display: block;
+   }
+   .desc{
+    margin-top: 2px;
+    font-size: 12px;
+    color: #969696;
+   }
+
 `
