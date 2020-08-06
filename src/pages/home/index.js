@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fromJS } from 'immutable'
-import axios from 'axios'
 
 import Topic from './components/Topic'
 import List from './components/List'
 import Recommend from './components/Recommend'
 import Writers from './components/Writers'
-import * as constants from './store/constants'
+import {
+    actionCreators
+} from './store'
 
 import {
     HomeWrapper,
@@ -40,19 +40,7 @@ class Home extends Component{
 const mapDispatchToProps = (dispatch) =>{
     return {
         getHomeData:()=>{
-            axios.get('/api/home.json')
-            .then(res => {
-                res = res.data;
-                const action = {
-                    type:constants.CHANGE_HOME_DATA,
-                    data:fromJS(res.data)
-                }
-                dispatch(action)
-                console.log(res.data)
-            })
-            .catch(err => {
-                console.error('err')
-            })
+            dispatch(actionCreators.getHomeData())
         }
     }
 }
