@@ -58,6 +58,7 @@ class Header extends Component {
         }
     }
     render() {
+        const {focused, handleFocus, handleBlur, } = this.props
         return (
             <HeaderWrapper>
                 <Logo />
@@ -69,19 +70,19 @@ class Header extends Component {
                     <NavItem className="left search">
                         <CSSTransition
                             timeout={200}
-                            in={this.props.focused}
+                            in={focused}
                             classNames="slide"
                             >
                             <NavSearch
-                                onFocus={this.props.handleFocus}
-                                onBlur={this.props.handleBlur}
-                                className={this.props.focused?'left focused':'left'}
+                                onFocus={handleFocus}
+                                onBlur={handleBlur}
+                                className={focused?'left focused':'left'}
                             />
                         </CSSTransition>
-                             <i className={this.props.focused?'iconfont focused zoom':'iconfont zoom'}>
+                             <i className={focused?'iconfont focused zoom':'iconfont zoom'}>
                                 &#xe614;
                             </i>
-                        {this.getListArea(this.props.focused)}
+                        {this.getListArea(focused)}
                     </NavItem>
                     <NavItem className="right">
                         <i className="iconfont">&#xe636;</i>
@@ -113,20 +114,16 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps =  (dispatch)=>{
     return {
         handleFocus:()=>{
-            const action = actionCreators.setFocuse(true)
-            dispatch(action)
+            dispatch(actionCreators.setFocuse(true))
         },
         handleBlur:()=>{
-            const action = actionCreators.setFocuse(false)
-            dispatch(action)
+            dispatch(actionCreators.setFocuse(false))
         },
         handleMouseEvent:(isMouseIn)=>{
-            const action = actionCreators.updateMouseIn(isMouseIn)
-            dispatch(action)
+            dispatch(actionCreators.updateMouseIn(isMouseIn))
         },
         getSearchList:()=>{
-            const action = actionCreators.getSearchList()
-            dispatch(action)
+            dispatch(actionCreators.getSearchList())
         },
         handleChangePage:(pageNum, total, spin)=>{
             let originAngle = spin.style.transform.replace(/[^0-9]/ig,'');
