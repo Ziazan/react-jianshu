@@ -9,7 +9,7 @@ import {
 class List extends Component{
     render(){
         const { list,articlePage,handleLoadMore } = this.props
-        
+        console.log('articlePage',articlePage)
         return (
             <div>
                 {
@@ -40,7 +40,7 @@ const  mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch)=>{
     return {
         handleLoadMore:(page)=>{
-            dispatch(actionCreators.getLoadMore(page))
+            dispatch(actionCreators.getLoadMore(page + 1))
         }
     }
 }

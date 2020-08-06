@@ -12,11 +12,21 @@ import {
 import {
     HomeWrapper,
     HomeLeft,
-    HomeRight
+    HomeRight,
+    BackTop
 } from './style'
 
 class Home extends Component{
+    componentDidMount(){
+        this.props.getHomeData();
+        this.bindEvent();
+     }
+    
+     componentWillUnmount(){
+        window.removeEventListener('scroll')
+     }
     render(){
+        const { isScrollBtnShow } = this.props
         return (
             <HomeWrapper>
                 <HomeLeft>
@@ -28,21 +38,40 @@ class Home extends Component{
                     <Recommend />
                     <Writers />
                 </HomeRight>
+                {isScrollBtnShow ? <BackTop onClick={this.handleBackTop}>顶部</BackTop>:null}
             </HomeWrapper>
         )
     }
-
-    componentDidMount(){
-       this.props.getHomeData();
+    handleBackTop(){
+        window.scrollTo(0,0)
     }
+    bindEvent(){
+        window.addEventListener('scroll',(e)=>{
+            if(document.documentElement.scrollTop > 100){
+                this.props.toggleScrollShow(true)
+            }else{
+                this.props.toggleScrollShow(false)
+            }
+        })
+    }
+
+    
 }
 
+const mapState = (state)=>{
+    return {
+        isScrollBtnShow:state.getIn(['home','isScrollBtnShow'])
+    }
+}
 const mapDispatchToProps = (dispatch) =>{
     return {
         getHomeData:()=>{
             dispatch(actionCreators.getHomeData())
+        },
+        toggleScrollShow:(isShow)=>{
+            dispatch(actionCreators.setScrollStatus(isShow))
         }
     }
 }
 
-export default connect(null,mapDispatchToProps)(Home)
+export default connect(mapState,mapDispatchToProps)(Home)

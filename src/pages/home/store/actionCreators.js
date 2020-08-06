@@ -8,7 +8,7 @@ const addArticleList = (list,nextPage)=>{
     return {
         type:constants.ADD_ARTICLE_LIST,
         list:fromJS(list),
-        nextPage
+        articlePage:nextPage
     }
 }
 
@@ -17,9 +17,12 @@ export const getHomeData = ()=>{
         axios.get('/api/home.json')
         .then(res => {
             res = res.data;
+            let data = res.data;
             const action = {
                 type:constants.CHANGE_HOME_DATA,
-                data:fromJS(res.data)
+                topicList:fromJS(data.topicList),
+                articleList:fromJS(data.articleList),
+                recommendList:fromJS(data.recommendList)
             }
             dispatch(action)
         })
@@ -31,13 +34,20 @@ export const getHomeData = ()=>{
 
 export const getLoadMore = (page) =>{
     return (dispatch) => {
-        axios.get('/api/articleList.json?page=' + (page+1))
+        axios.get('/api/articleList.json?page=' + page)
         .then(res => {
             res = res.data;
-            dispatch(addArticleList(res.list,page+1))
+            dispatch(addArticleList(res.list,page))
         })
         .catch(err => {
             console.error('err')
         })
+    }
+}
+
+export const setScrollStatus = (isShow)=>{
+    return {
+        type:constants.TOGGLE_SCROLL_TOP,
+        isScrollBtnShow:isShow
     }
 }

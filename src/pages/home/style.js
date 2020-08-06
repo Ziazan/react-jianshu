@@ -18,7 +18,20 @@ export const HomeLeft = styled.div`
 export const HomeRight = styled.div`
     width:280px;
     float:left;
-`
+`;
+export const BackTop = styled.div`
+    position:fixed;
+    width:50px;
+    height:50px;
+    line-height:50px;
+    font-size:16px;
+    text-align:center;
+    right:50px;
+    bottom:50px;
+    color:#333;
+    border:1px solid #ddd;
+    border-radius:25px;
+`;
 
 export const TopicWrapper = styled.div`
     overflow: hidden;
