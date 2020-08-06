@@ -105,6 +105,7 @@ export const SearchInfo = styled.div`
     width:240px;
     box-shadow: 0 0 8px rgba(0, 0, 0, .2);
     padding:10px;
+    background-color:#fff;
 `
 export const SearchHeader = styled.div`
    margin-bottom:10px;

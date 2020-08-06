@@ -20,8 +20,7 @@ import {
 } from './style'
 
 class Header extends Component {
-    
-    componentWillMount(){
+    componentDidMount(){
         this.props.getSearchList();
     }
     getListArea(show){
