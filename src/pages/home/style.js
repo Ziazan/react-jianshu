@@ -74,6 +74,19 @@ export const ListItem = styled.div`
 export const ListInfo = styled.div`
     width:500px;
     float:left;
+`;
+
+export const LoadMore = styled.div`
+    width:100%;
+    height:30px;
+    line-height:30px;
+    background-color:#999;
+    color:#fff;
+    font-size:14px;
+    text-align:center;
+    border-radius:15px;
+    margin-top:10px;
+    cursor:pointer;
 `
 export const Link = styled.a`
 `

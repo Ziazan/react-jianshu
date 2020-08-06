@@ -4,6 +4,13 @@ import {
     constants,
 }  from './index'
 
+const addArticleList = (list,nextPage)=>{
+    return {
+        type:constants.ADD_ARTICLE_LIST,
+        list:fromJS(list),
+        nextPage
+    }
+}
 
 export const getHomeData = ()=>{
     return (dispatch)=>{
@@ -20,6 +27,17 @@ export const getHomeData = ()=>{
             console.error('err')
         })
     }
-    
+}
 
+export const getLoadMore = (page) =>{
+    return (dispatch) => {
+        axios.get('/api/articleList.json?page=' + (page+1))
+        .then(res => {
+            res = res.data;
+            dispatch(addArticleList(res.list,page+1))
+        })
+        .catch(err => {
+            console.error('err')
+        })
+    }
 }
