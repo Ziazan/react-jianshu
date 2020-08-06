@@ -31,10 +31,8 @@ export const getSearchList = ()=>{
     return (dispatch)=>{
        axios.get('/api/list.json')
        .then(res =>{
-        console.log(res)
         res = res.data;
         if(res.errcode === 0){
-            console.log('res.data',res.data)
             dispatch(_changeList(res.data))
         }
        })

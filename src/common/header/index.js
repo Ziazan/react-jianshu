@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import { actionCreators } from './store'
 import * as constants from './store/constants'
+import { Link } from 'react-router-dom'
 
 import {
     HeaderWrapper,
@@ -60,7 +61,10 @@ class Header extends Component {
         const {focused, handleFocus, handleBlur, } = this.props
         return (
             <HeaderWrapper>
-                <Logo />
+                <Link to='/'>
+                    <Logo />
+                </Link>
+                
                 <Nav>
                     <NavItem className="left active">发现</NavItem>
                     <NavItem className="left">关注</NavItem>
