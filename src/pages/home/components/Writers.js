@@ -23,7 +23,7 @@ class Writers extends Component{
                     {
                         [1,2,3,5,6,7,8,9].map(item =>{
                             return (
-                                <WriterItem>
+                                <WriterItem key={item}>
                                     <img  className="avatar" src="//upload.jianshu.io/collections/images/21/20120316041115481.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="" />
                                     <i className="iconfont follow"> &#xe851;</i>
                                     <span className="name">日记</span>
