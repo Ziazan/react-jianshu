@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import { actionCreators } from './store'
+import * as constants from './store/constants'
 
 import {
     HeaderWrapper,
@@ -18,21 +19,35 @@ import {
     Button
 } from './style'
 
-
 class Header extends Component {
+    
+    componentWillMount(){
+        this.props.getSearchList();
+    }
     getListArea(show){
-        if(show){
+        let pageList = [];
+        const { pageNum, total, list, mouseIn,handleMouseEvent,handleChangePage} = this.props;
+        const newList = list.toJS()
+        if(newList.length){
+            for(let i = (pageNum - 1) * constants.PAGE_SIZE; i < Math.min(pageNum * constants.PAGE_SIZE,newList.length); i++){
+                pageList.push(
+                    <SearchItem key={newList[i]}>{newList[i]}</SearchItem>
+                )
+            }
+        }
+        if(show || mouseIn){
             return (
-                <SearchInfo>
+                <SearchInfo 
+                    onMouseEnter={()=>{handleMouseEvent(true)}}
+                    onMouseLeave={()=>{handleMouseEvent(false)}}>
                     <SearchHeader>
                         热门搜索
-                        <SearchSwitch>换一批</SearchSwitch>
+                        <SearchSwitch 
+                            onClick={()=>{handleChangePage(pageNum,total)}}
+                        >换一批</SearchSwitch>
                     </SearchHeader>
                     <SearchList>
-                        <SearchItem>简书</SearchItem>
-                        <SearchItem>简书</SearchItem>
-                        <SearchItem>简书</SearchItem>
-                        <SearchItem>简书</SearchItem>
+                        {pageList}
                     </SearchList>
                 </SearchInfo>
             )
@@ -86,6 +101,10 @@ class Header extends Component {
 const mapStateToProps = (state)=>{
     return {
         focused:state.getIn(['header','focused']),
+        mouseIn:state.getIn(['header','mouseIn']),
+        list:state.getIn(['header','list']),
+        pageNum:state.getIn(['header','pageNum']),
+        total:state.getIn(['header','total']),
     }
 }
 
@@ -98,6 +117,21 @@ const mapDispatchToProps =  (dispatch)=>{
         handleBlur:()=>{
             const action = actionCreators.setFocuse(false)
             dispatch(action)
+        },
+        handleMouseEvent:(isMouseIn)=>{
+            const action = actionCreators.updateMouseIn(isMouseIn)
+            dispatch(action)
+        },
+        getSearchList:()=>{
+            const action = actionCreators.getSearchList()
+            dispatch(action)
+        },
+        handleChangePage:(pageNum, total)=>{
+            if(pageNum < total){
+                dispatch(actionCreators.changePage(pageNum + 1))
+            }else{
+                dispatch(actionCreators.changePage(1))
+            }
         }
     }
 }
