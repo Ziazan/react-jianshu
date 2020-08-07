@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 
 class Detail extends Component{
 
@@ -10,4 +11,4 @@ class Detail extends Component{
     }
 }
 
-export default Detail
+export default withRouter(Detail)
