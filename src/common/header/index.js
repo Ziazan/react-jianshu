@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import { actionCreators } from './store'
+import {actionCreators as loginActionCreators} from './../../pages/login/store'
 import * as constants from './store/constants'
 import { Link } from 'react-router-dom'
 
@@ -58,7 +59,7 @@ class Header extends Component {
         }
     }
     render() {
-        const {focused, handleFocus, handleBlur, } = this.props
+        const {focused, handleFocus, handleBlur, hasLogin,handleLogout} = this.props
         return (
             <HeaderWrapper>
                 <Link to='/'>
@@ -90,9 +91,14 @@ class Header extends Component {
                     <NavItem className="right">
                         <i className="iconfont">&#xe636;</i>
                     </NavItem>
-                    <Link to="/login">
-                        <NavItem className="right">登录</NavItem>
-                    </Link>
+                    {
+                        hasLogin?
+                        <NavItem className="right" onClick={handleLogout}>退出</NavItem>:
+                        <Link to="/login">
+                            <NavItem className="right">登录</NavItem>
+                        </Link>
+                    }
+                   
                 </Nav>
                 <Addition>
                     <Button className="writting">
@@ -112,6 +118,7 @@ const mapStateToProps = (state)=>{
         list:state.getIn(['header','list']),
         pageNum:state.getIn(['header','pageNum']),
         total:state.getIn(['header','total']),
+        hasLogin:state.getIn(['login','hasLogin'])
     }
 }
 
@@ -142,6 +149,9 @@ const mapDispatchToProps =  (dispatch)=>{
             }else{
                 dispatch(actionCreators.changePage(1))
             }
+        },
+        handleLogout:()=>{
+            dispatch(loginActionCreators.doLogout())
         }
     }
 }

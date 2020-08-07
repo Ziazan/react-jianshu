@@ -1,3 +1,10 @@
+## 样式组件获取dom
+使用innerRef 获取 StyleComponents的 真实dom
+新版本不需要使用innerRef了。这里使用 ref 就可以
+## 路由重定向
+路由重定向回首页
+<Redirect to='/'>
+
 ## 路由数据传递
 
 ### 第一种：动态路由
