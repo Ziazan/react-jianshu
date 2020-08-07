@@ -1,3 +1,19 @@
+## 路由数据传递
+
+### 第一种：动态路由
+`to="/detail/:id"`
+这样才能匹配 `/detail/1`
+在当前页面可以使用：`this.props.match.params.id`获取上一个页面传过来的参数。
+
+### 第二种：url参数
+`to="/detail"`
+
+跳转的url `/detail?id=1`
+this.props.location.search : ?id=1
+这里需要解析字符串获得参数
+
+
+
 ## redux-immutable
 `redux-immutable` 把state的取值统一
 
